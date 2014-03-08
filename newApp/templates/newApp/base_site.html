@@ -1,0 +1,12 @@
+<!-- copied from /Library/Python/2.7/site-packages/django/contrib/admin/templates/admin/base_site.html -->
+
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">{% trans 'New App Administrator' %}</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

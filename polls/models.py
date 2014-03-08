@@ -6,6 +6,7 @@ class Author(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField(default=0) 
 
+    # whenever an Author object is printed 
     def __unicode__(self):
         return self.name
 
@@ -20,6 +21,11 @@ class Poll(models.Model):
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    # sorting self defined methods is not support, this is workaround
+    # if you try to sort by was_published .. it will sort by pub_date
+    was_published_recently.admin_order_field = 'pub_date'  
+    was_published_recently.short_description = "Published recently?" #changes name of header from function name to defined string
+    was_published_recently.boolean = True 
 
 
 class Choice(models.Model):

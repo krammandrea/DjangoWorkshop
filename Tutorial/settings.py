@@ -36,7 +36,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls'
+    # add your apps here :) 
+    'polls',
+    'newApp'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,6 +64,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Add references to templates here, a list of paths when searching for templates
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
