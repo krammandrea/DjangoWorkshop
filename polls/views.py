@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from polls.models import Choice, Poll
 
+from django.views import generic 
+
 
 
 # First option to render a page, Second option: render()
@@ -17,30 +19,35 @@ from django.http import HttpResponse
     # return HttpResponse(template.render(context))
 from polls.models import Poll, Author, Choice
 
-def index(request):
-    latest_poll_list = Poll.objects.order_by('pub_date')[:4]
-    # output = ', '.join([p.question for p in latest_poll_list])
-    context = {'poll_list':latest_poll_list}
+class IndexView(generic.ListView):
+    template_name = "polls/index.html"
+    context_object_name = "poll_list"
 
-    return render(request, 'polls/index.html', context)
+    def get_queryset(self):
+        return Poll.objects.order_by('pub_date')[:4]
 
 
 # def index2(request):
 #     return HttpResponse("Hello, second world. You're at the poll index.")
 
-def vote(request, poll_id):
+class VoteView(generic.DetailView):
     # long version of get_object_or_404
     # try:
     #     currentPoll = Poll.objects.get(pk=poll_id)
     # except Poll.DoesNotExist:
     #     raise Http404
 
-    currentPoll = get_object_or_404(Poll, pk=poll_id)
-    return render(request, "polls/vote.html", {"poll": currentPoll})
+    # get_object_or_404
+    # currentPoll = get_object_or_404(Poll, pk=poll_id)
+    # return render(request, "polls/vote.html", {"poll": currentPoll})
 
-def results(request, poll_id):
-    currentPoll = get_object_or_404(Poll, pk=poll_id)
-    return render(request, "polls/results.html", {"poll": currentPoll})
+    # use django.views.generic.DetailView
+    model = Poll
+    template_name = "polls/vote.html"
+
+class ResultsView(generic.DetailView):
+    model = Poll
+    template_name = "polls/results.html"
 
 
 def voted(request, poll_id):
@@ -59,5 +66,5 @@ def voted(request, poll_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', kwargs={"poll_id":p.id}))
+        return HttpResponseRedirect(reverse('polls:results', kwargs={"pk":p.id}))
 

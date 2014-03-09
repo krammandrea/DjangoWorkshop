@@ -4,12 +4,11 @@ from polls import views
 
 urlpatterns = patterns('',
     # url(r'^$', views. index, name='index'),
-    url(r'^index', views.index, name='index'),
+    url(r'^index', views.IndexView.as_view(), name='index'),
     # url(r'^twoInd', views.index2, name='indexTwo'),
-    url(r'(?P<poll_id>\d+)/vote$', views.vote, name='vote'),
-    url(r'(?P<poll_id>\d+)$', views.results, name='results'),
+    url(r'(?P<pk>\d+)/vote$', views.VoteView.as_view(), name='vote'),
+    url(r'(?P<pk>\d+)$', views.ResultsView.as_view(), name='results'),
     url(r'(?P<poll_id>\d+)/voted$', views.voted, name='voted')
-
 )
 
 #TODO do urls for detail, result, vote
