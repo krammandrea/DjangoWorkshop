@@ -20,7 +20,7 @@ class Poll(models.Model):
         return self.question
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        return timezone.now() > self.pub_date >= timezone.now() - datetime.timedelta(days=1)
     # sorting self defined methods is not support, this is workaround
     # if you try to sort by was_published .. it will sort by pub_date
     was_published_recently.admin_order_field = 'pub_date'  
