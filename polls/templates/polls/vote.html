@@ -3,8 +3,23 @@
 and then for a list element with the dot operator -->
 <h1>{{poll.question}}</h1>
 
-<ul>
-{% for choice in poll.choice_set.all %}
+<!-- <ul> -->
+<!-- {% for choice in poll.choice_set.all %}
     <li>{{ choice.choice_text }}</li>
 {% endfor %}
-</ul>
+</ul> -->
+
+<!-- gets passed in if the form submit was faulty, see views.vote()-->
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+
+<form action="{% url 'polls:voted' poll.id %}" method="post">
+<!-- use to avoid cross site request forgeries -->
+{% csrf_token %}
+{% for choice in poll.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
