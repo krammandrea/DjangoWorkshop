@@ -1,0 +1,10 @@
+
+<!-- Template poll checks first for a dictionary keyword, then for an object attribute
+and then for a list element with the dot operator -->
+<h1>{{poll.question}}</h1>
+
+<ul>
+{% for choice in poll.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>

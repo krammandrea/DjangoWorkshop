@@ -7,7 +7,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'Tutorial.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^polls/', include('polls.urls')),
+    # use namespace to indentify the app for template url 
+    url(r'^polls/', include('polls.urls', namespace="polls")),
     # include() references the given urlsConf and passes only of the rest of the url string
     url(r'^admin/', include(admin.site.urls)),
 )

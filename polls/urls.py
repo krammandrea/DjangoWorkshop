@@ -41,4 +41,6 @@ string1$ : the input has to end with string1
 \d+ : the input can be multiple digits
 ?P<useThisVariableLater>\d+ : any digits given in input
                  will be saved in useThisVariableLater
+() :captures the text that needs to be matched and sends it as an
+    argument to the view 
 """
