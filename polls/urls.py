@@ -5,8 +5,11 @@ from polls import views
 urlpatterns = patterns('',
     # url(r'^$', views. index, name='index'),
     url(r'^index', views.index, name='index'),
-    url(r'^twoInd', views.index2, name='indexTwo'),
-    # url(r'?P<>')
+    # url(r'^twoInd', views.index2, name='indexTwo'),
+    url(r'(?P<poll_id>\d+)/vote$', views.vote, name='vote'),
+    url(r'(?P<poll_id>\d+)$', views.results, name='results'),
+    url(r'(?P<poll_id>\d+)/voted$', views.voted, name='voted')
+
 )
 
 #TODO do urls for detail, result, vote

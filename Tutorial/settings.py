@@ -50,7 +50,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+# starting point for matching the given url
 ROOT_URLCONF = 'Tutorial.urls'
+# ROOT_URLCONF = 'polls.urls'
 
 WSGI_APPLICATION = 'Tutorial.wsgi.application'
 
