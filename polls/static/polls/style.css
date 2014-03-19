@@ -1,0 +1,8 @@
+li a {
+    color: green;
+}
+
+/*Not using the django template engine, so place relative to this css file*/
+body {
+background: white url("images/Mandelbrot.png") no-repeat right bottom;
+}
